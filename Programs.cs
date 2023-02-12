@@ -5,6 +5,16 @@
     // int namber1 = Convert.ToInt32(Console.ReadLine());
     // Console.Write("Enter two namber: ");
     // int namber2 = Convert.ToInt32(Console.ReadLine());
+
+
+// Этот блок на тот случай если кому то приспичит ввести одинакоыве числа
+// можно еще конечно отфильрровать этот момент при вводе, но так проще 
+//     if (namber1 == namber2) 
+//     {
+//         Console.WriteLine("These numbers are equal");
+//         return;
+//     }
+
     // if (namber1 > namber2)
     //     Console.WriteLine($"The first number {namber1} is greater than the second {namber2}");
     // else
