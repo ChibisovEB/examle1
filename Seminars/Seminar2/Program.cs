@@ -37,3 +37,20 @@
 //            Console.WriteLine("There is no third digit in your number");
 //        else
 //            Console.WriteLine($"The third digit of the number {number} is {thirdNumber}");
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Задача 15: Напишите программу, которая принимает на вход цифру, 
+// обозначающую день недели, и проверяет, является ли этот день выходным.
+//    bool isWeekend(int num)
+//    {
+//        // Тут тоже было бы неплохо проверить на принадлежность числа к дням недели, но в условии задачи этого нет
+//        // Да и вообще возможно это реализовано в другом методе другими специально обучеными людьми
+//        if (num == 6 || num == 7) return true; else return false;
+//    }
+//        
+//    Console.Write("Enter the number of the day of the week: ");    
+//    int numberDay = Convert.ToInt32(Console.ReadLine());
+//    
+//    if (isWeekend(numberDay))
+//        Console.WriteLine("Yes");
+//    else
+//        Console.WriteLine("No");
