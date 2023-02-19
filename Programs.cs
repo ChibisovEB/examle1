@@ -1,60 +1,61 @@
 
-    // //  Задача 2: Напишите программу, которая на вход принимает два числа и выдаёт, 
-    // //  какое число большее, а какое меньшее. 
-    // Console.Write("Enter one namber: ");
-    // int namber1 = Convert.ToInt32(Console.ReadLine());
-    // Console.Write("Enter two namber: ");
-    // int namber2 = Convert.ToInt32(Console.ReadLine());
 
-
-// Этот блок на тот случай если кому то приспичит ввести одинакоыве числа
-// можно еще конечно отфильрровать этот момент при вводе, но так проще 
-//     if (namber1 == namber2) 
-//     {
-//         Console.WriteLine("These numbers are equal");
-//         return;
-//     }
-
-    // if (namber1 > namber2)
-    //     Console.WriteLine($"The first number {namber1} is greater than the second {namber2}");
-    // else
-    //     Console.WriteLine($"The second number {namber2} is greater than the first {namber1}");
-        
-        
-    // //Задача 4: Напишите программу, которая принимает на вход три числа и выдаёт максимальное из этих чисел.
-    // Console.Write("Enter one namber: ");
-    // int namber1 = Convert.ToInt32(Console.ReadLine());
-    // Console.Write("Enter two namber: ");
-    // int namber2 = Convert.ToInt32(Console.ReadLine());
-    // Console.Write("Enter three namber: ");
-    // int namber3 = Convert.ToInt32(Console.ReadLine());
-    // if ((namber1 > namber2) & (namber1 > namber3))
-    //     Console.WriteLine(namber1);
-    // else if ((namber2 > namber1) & (namber2 > namber3))
-    //     Console.WriteLine(namber2);
-    // else
-    //     Console.WriteLine(namber3);
-        
-    // // Задача 6: Напишите программу, которая на вход принимает число и выдаёт, 
-    // // является ли число чётным (делится ли оно на два без остатка).    
-    // Console.Write("Enter namber: ");
-    // int namber = Convert.ToInt32(Console.ReadLine()); 
-    // if (namber % 2 == 0)
-    //     Console.WriteLine("The number is even");
-    // else
-    //     Console.WriteLine("The number is not even");
-    
-    // // Задача 8: Напишите программу, которая на вход принимает число (N), а на выходе 
-    // // показывает все чётные числа от 1
-    // Console.Write("Enter namber: ");
-    // int namber = Convert.ToInt32(Console.ReadLine()); 
-    // int index = 1;
-    // string comma = ", ";
-    // while (index <= namber) 
-    // {
-    //     if (index == namber) comma = "";                        // Эти две строчки нужны для
-    //     if ((index == namber-1) & (index % 2 == 0)) comma = ""; // исключения лишней запятой
-    //     if (index % 2 == 0)
-    //         Console.Write(index + comma);
-    //     index++;
-    // }
+// //Задача 19
+// //Напишите программу, которая принимает на вход пятизначное число и проверяет, является ли оно палиндромом.
+ 
+// // На самом деле этот метод проверяет не только число, но ведь число тоже проверяет :-)
+// bool isPalindrom (string n)
+// {
+// int nLen = n.Length;
+// int count = 0;
+ 
+// while (count < nLen / 2)
+// {
+// if (n[count] != n[nLen - count - 1])
+// return false;
+// count++;
+// }
+// return true;
+// }
+ 
+// Console.Write ("Enter a five-digit number:");
+ 
+// if (isPalindrom (Console.ReadLine ()))
+// Console.WriteLine ("Yes");
+// else
+// Console.WriteLine ("No");
+ 
+// //Задача 21
+// //Напишите программу, которая принимает на вход координаты двух точек и находит расстояние между ними в 3D пространстве.
+ 
+// double distance3D (double xa, double ya, double za, double xb, double yb, double zb)
+// {
+// return Math.Sqrt(Math.Pow(xb-xa,2) + Math.Pow(yb-ya,2) + Math.Pow(zb-za,2));
+// }
+ 
+// // запрашиваем координаты первой точки
+// Console.WriteLine ("Enter the three coordinates of the first point (X,Y,Z):");
+// double xa = Convert.ToDouble(Console.ReadLine());
+// double ya = Convert.ToDouble(Console.ReadLine());
+// double za = Convert.ToDouble(Console.ReadLine());
+// // запрашиваем координаты второй точки
+// Console.WriteLine ("Enter the three coordinates of the first point (X,Y,Z):");
+// double xb = Convert.ToDouble(Console.ReadLine());
+// double yb = Convert.ToDouble(Console.ReadLine());
+// double zb = Convert.ToDouble(Console.ReadLine()); 
+// Console.WriteLine($"Entered coordinates of the first and two points: ({xa}, {ya}, {za}) ({xb}, {yb}, {zb})");
+// Console.WriteLine($"The distance between these points: {Math.Round(distance3D(xa,ya,za,zb,yb,zb),2)}");
+ 
+// // Задача 23
+// // Напишите программу, которая принимает на вход число (N) и выдаёт таблицу кубов чисел от 1 до N.
+// Console.WriteLine ("Enter a number: ");
+// int x = Convert.ToInt32(Console.ReadLine());
+// int count = 1;
+// string comma = ", ";
+// while (count <= x)
+// {
+// if (count == x) comma = "";
+// Console.Write(Math.Pow(count,3) + comma);
+// count++;
+// }
+// Console.WriteLine();
