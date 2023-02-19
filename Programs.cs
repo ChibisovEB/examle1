@@ -44,7 +44,7 @@
 // double yb = Convert.ToDouble(Console.ReadLine());
 // double zb = Convert.ToDouble(Console.ReadLine()); 
 // Console.WriteLine($"Entered coordinates of the first and two points: ({xa}, {ya}, {za}) ({xb}, {yb}, {zb})");
-// Console.WriteLine($"The distance between these points: {Math.Round(distance3D(xa,ya,za,zb,yb,zb),2)}");
+// Console.WriteLine($"The distance between these points: {Math.Round(distance3D(xa,ya,za,xb,yb,zb),2)}");
  
 // // Задача 23
 // // Напишите программу, которая принимает на вход число (N) и выдаёт таблицу кубов чисел от 1 до N.
