@@ -1,70 +1,102 @@
-// Задача 41: Пользователь вводит с клавиатуры M чисел. 
-// Посчитайте, сколько чисел больше 0 ввёл пользователь.
-Console.Write("Enter the number of numbers: ");
-int col = Convert.ToInt32(Console.ReadLine());
-int count = 0;
-for (int i = 0; i < col; i++)
+// Метод генерирует двумерный массив
+int[,] CreateRandom2dArray()
 {
-    Console.Write($"Enter {i+1} number:");
-    if (Convert.ToInt32(Console.ReadLine()) > 0)
-        count++;
-}
-Console.WriteLine($"Count = {count}");
+    Console.Write("Input a number of rows: ");
+    int rows = Convert.ToInt32(Console.ReadLine());
+    Console.Write("Input a number of columns: ");
+    int columns = Convert.ToInt32(Console.ReadLine());
+    Console.Write("Input a min possible value: ");
+    int minValue = Convert.ToInt32(Console.ReadLine());
+    Console.Write("Input a max possible value: ");
+    int maxValue = Convert.ToInt32(Console.ReadLine());
 
-/////////////////////////////////////////////////////////////
-// Задача 43: Напишите программу, которая найдёт точку пересечения двух прямых, 
-// заданных уравнениями y = k1 * x + b1, y = k2 * x + b2; 
-// значения b1, k1, b2 и k2 задаются пользователем.
-
-const int COEFF = 0;
-const int CONSTANT= 1;
-const int LINE1 = 1;
-const int LINE2 = 2;
-const int X = 0;
-const int Y = 1;
-
-double[] EnterLine(int numberOFLine)
-{
-    double[] lineData = new double[2];
-    Console.Write($"Enter the coefficient for the {numberOFLine} straight: ");
-    lineData[COEFF] = Convert.ToDouble(Console.ReadLine());
-    Console.Write($"Enter the constant for the {numberOFLine} straight: ");
-    lineData[CONSTANT] = Convert.ToDouble(Console.ReadLine());
-    return lineData;
+    int[,] array = new int[rows, columns];
+    for (int i = 0; i < rows; i++)
+        for (int j = 0; j < columns; j++)
+            array[i,j] = new Random().Next(minValue, maxValue + 1);
+    return array; 
 }
-double[] FindCoordinates(double[] lineData1, double[] lineData2)
+
+// Метод выводит на экран 2 мерный массив
+void Show2dArray(int[,] array)
 {
-    double[] coord = new double[2];
-    coord[X] = (lineData1[CONSTANT] - lineData2[CONSTANT]) 
-        / (lineData2[COEFF] - lineData1[COEFF]);
-    coord[Y] = lineData1[CONSTANT] * coord[X] + lineData1[CONSTANT];
-    return coord;
-}
-bool CheckLine(double[] lineData1, double[] lineData2)
-{
-    if (lineData1[COEFF] == lineData2[COEFF])
+    for (int i = 0; i < array.GetLength(0); i++)
     {
-        if (lineData1[CONSTANT] == lineData2[CONSTANT])
-        {
-            Console.WriteLine("The lines coincide!");
-            return false;
-        }
-        else
-        {
-            Console.WriteLine("The lines are parallel!");
-            return false;
-        }
+        for (int j = 0; j < array.GetLength(1); j++)
+            Console.Write(array[i,j] + " ");
+        Console.WriteLine();
     }
-    return true;
+    Console.WriteLine();
 }
 
-double[] lineData1 = EnterLine(LINE1);
-double[] lineData2 = EnterLine(LINE2);
-
-if (CheckLine(lineData1, lineData2))
+//////////////////////////////////////////////////////////////
+// Задача 47. Задайте двумерный массив размером m×n, заполненный случайными вещественными числами.
+double[,] CreateRandom2dArrayDouble(int m, int n)
 {
-    double[] coord = FindCoordinates(lineData1, lineData2);
-    Console.Write($"Point of intersection of lines y={lineData1[COEFF]}*x+{lineData1[CONSTANT]} и y={lineData2[COEFF]}*x+{lineData2[CONSTANT]}");
-    Console.WriteLine($" has coordinates ({coord[X]}, {coord[Y]})");
+    double[,] array = new double[m, n];
+    for (int i = 0; i < m; i++)
+        for (int j = 0; j < n; j++)
+        {
+            array[i,j] = new Random().NextDouble() * 10 - 5;
+            array[i,j] = Math.Round(array[i,j],1);
+        }
+    return array; 
+}
+void Show2dArrayDouble(double[,] array)
+{
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+            Console.Write(array[i,j] + " ");
+        Console.WriteLine();
+    }
+    Console.WriteLine();
 }
 
+Console.WriteLine("==================================================");
+Console.WriteLine("Task 47");
+double[,] dArray = CreateRandom2dArrayDouble(3,4);
+Show2dArrayDouble(dArray); 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//Задача 50. Напишите программу, которая на вход принимает позиции элемента в двумерном массиве, 
+//и возвращает значение этого элемента или же указание, что такого элемента нет.
+string GetElement(int x, int y)
+{
+    if (x >= dArray.GetLength(0) || y >= dArray.GetLength(1))
+        return "The specified element is outside the bounds of the array";
+    else
+        return Convert.ToString(dArray[x,y]);
+}
+
+Console.WriteLine("==================================================");
+Console.WriteLine("Task 50");
+Console.WriteLine("Enter position element in array");
+Console.Write("X = ");
+int x = Convert.ToInt32(Console.ReadLine());
+Console.Write("Y = ");
+int y = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine(GetElement(x,y));
+
+////////////////////////////////////////////////////////////////////////////////
+//Задача 52. Задайте двумерный массив из целых чисел. 
+//Найдите среднее арифметическое элементов в каждом столбце.
+Console.WriteLine("==================================================");
+Console.WriteLine("Task 52");
+void ShowArithmeticMean(int[,] ar)
+{
+    int summ;
+    Console.Write("Arithmetic mean by columns: ");
+    for(int j = 0; j < ar.GetLength(1); j++)
+    {
+        summ = 0;
+        for(int i = 0; i < ar.GetLength(0); i++)
+            summ += ar[i,j];
+        Console.Write(Math.Round(Convert.ToDouble(summ) / ar.GetLength(0),1) + " ");
+    }
+    Console.WriteLine();
+}
+
+int[,] array = CreateRandom2dArray();
+Show2dArray(array);
+ShowArithmeticMean(array);
