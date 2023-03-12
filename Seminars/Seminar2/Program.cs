@@ -177,13 +177,42 @@ Console.WriteLine("Task 60");
 ShowThreeArray(CreateThreeArray(2,2,2));
 
 // Задача 62. Напишите программу, которая заполнит спирально массив 4 на 4.
+// в этой задаче я совсем запутался. Должно раюотать, но не работает. И я не понимаю почему.
+
 void SpiralFill(int[,] array)
 {
-
+    int n = 0;
+    int m = 0;
+    int Ibeg = 0, Ifin = 0, Jbeg = 0, Jfin = 0;
+    int k = 1;
+    int i = 0;
+    int j = 0;
+    while (k <= n * m)
+    {
+        array[i,j] = k;
+        if (i == Ibeg && j < m - Jfin - 1)
+            ++j;
+        else if (j == m - Jfin - 1 && i < n - Ifin - 1)
+            ++i;
+        else if (i == n - Ifin - 1 && j > Jbeg)
+            --j;
+        else
+            --i;
+        
+        if ((i == Ibeg + 1) && (j == Jbeg) && (Jbeg != m - Jfin - 1))
+        {
+            ++Ibeg;
+            ++Ifin;
+            ++Jbeg;
+            ++Jfin;
+        }
+        ++k;
+    }
 }
 Console.WriteLine();
 Console.WriteLine("Task 62");
 int[,] arrayTask62 = new int[4,4];
 
+SpiralFill(arrayTask62);
 Show2dArray(arrayTask62);
-Console.WriteLine(arrayTask62.Length);
+
