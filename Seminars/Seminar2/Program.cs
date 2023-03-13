@@ -1,218 +1,39 @@
-// Метод генерирует двумерный массив
-int[,] CreateRandom2dArray()
+//Задача 64: Задайте значение N. Напишите программу, которая выведет все 
+//натуральные числа в промежутке от N до 1. Выполнить с помощью рекурсии.
+// // Пример применения рекусивного метода
+// // Метод выводит все целые числа от m до n
+void ShowNums(int m, int n)
 {
-    Console.Write("Input a number of rows: ");
-    int rows = Convert.ToInt32(Console.ReadLine());
-    Console.Write("Input a number of columns: ");
-    int columns = Convert.ToInt32(Console.ReadLine());
-    Console.Write("Input a min possible value: ");
-    int minValue = Convert.ToInt32(Console.ReadLine());
-    Console.Write("Input a max possible value: ");
-    int maxValue = Convert.ToInt32(Console.ReadLine());
-
-    int[,] array = new int[rows, columns];
-    for (int i = 0; i < rows; i++)
-        for (int j = 0; j < columns; j++)
-            array[i,j] = new Random().Next(minValue, maxValue + 1);
-    return array; 
+    if (m > n) ShowNums(m, n+1);
+    if (m < n) ShowNums(m, n-1);
+    Console.Write(n + " ");
 }
+ Console.Write("Enter namber: ");
+ int N = Convert.ToInt32(Console.ReadLine());
+ ShowNums(N,1);
 
-// Метод выводит на экран 2 мерный массив
-void Show2dArray(int[,] array)
+//Задача 66: Задайте значения M и N. Напишите программу, которая найдёт 
+//сумму натуральных элементов в промежутке от M до N.
+int SumNums(int m, int n)
 {
-    for (int i = 0; i < array.GetLength(0); i++)
-    {
-        for (int j = 0; j < array.GetLength(1); j++)
-            Console.Write(array[i,j] + " ");
-        Console.WriteLine();
-    }
-    Console.WriteLine();
-}
-
-//Задача 54: Задайте двумерный массив. Напишите программу, которая упорядочит 
-//по убыванию элементы каждой строки двумерного массива.
-void ArraySortInRow (int[,] array, int sortBy = 0)
-// sortBy = 0 - сортировка по возрастанию
-// sortBy = 1 - сортировка по убывнию
-{
-    for (var i = 0; i < array.GetLength(0); i++)
-        //сортировка пузырьком
-        for (var j = 0; j < array.GetLength(1); j++)
-            for (var k = 0; k < array.GetLength(1); k++)
-            {
-                if (sortBy == 0)
-                {
-                    if (array[i, j] >= array[i, k]) continue;
-                }
-                else
-                { 
-                    if (array[i, j] <= array[i, k]) continue;
-                }
-                var temp = array[i, j];
-                array[i, j] = array[i, k];
-                array[i, k] = temp;
-            }
-}
-
-int[,] array = CreateRandom2dArray();
-Show2dArray(array);
-ArraySortInRow(array, 0);
-Show2dArray(array);
-////////////////////////////////////////////////////////////////////////
-//Задача 56: Задайте прямоугольный двумерный массив. Напишите программу, 
-//которая будет находить строку с наименьшей суммой элементов.
-int[] AmountByLines(int[,] array)
-{
-    int[] temp = new int[array.GetLength(0)];
-    int sum = 0;
-    for(int i = 0; i < array.GetLength(0); i++)
-        for(int j = 0; j < array.GetLength(1); j++)
-            temp[i] += array[i,j];
-    return temp;
-}
-int GetMinElement(int[] array)
-{
-    int rowMin = 0;
-    for(int i = 1; i < array.Length; i++)
-        if(array[rowMin] > array[i]) rowMin = i;
-    return rowMin + 1;
-}
-Console.WriteLine("Task 56");
-int[] arraySum = AmountByLines(array);
-Console.WriteLine($"{GetMinElement(arraySum)} строка");
-////////////////////////////////////////////////////////////////////////
-// Задача 58: Задайте две матрицы. Напишите программу, которая будет находить произведение двух матриц.
-int[,] CreateRandomMatrix(int rows, int columns)
-{
-    int minValue = 0;
-    int maxValue = 9;
-    int[,] array = new int[rows, columns];
-    for (int i = 0; i < rows; i++)
-        for (int j = 0; j < columns; j++)
-            array[i,j] = new Random().Next(minValue, maxValue + 1);
-    return array; 
-}
-int[,] MultipleMatrix(int[,] m1, int[,] m2)
-{
-        int rows1 = m1.GetLength(0);
-        int cols1 = m1.GetLength(1);
-        int rows2 = m2.GetLength(0);
-        int cols2 = m2.GetLength(1);
-
-        int[,] result = new int[rows1, cols2];
-
-        for (int i = 0; i < rows1; i++)
-        {
-            for (int j = 0; j < cols2; j++)
-            {
-                int sum = 0;
-                for (int k = 0; k < cols1; k++)
-                    sum += m1[i, k] * m2[k, j];
-                result[i, j] = sum;
-            }
-        }
-
-        return result;
+    if (m > n) return n + SumNums(m, n+1);
+    if (m < n) return n + SumNums(m, n-1);
+    return n;
 }
 Console.WriteLine();
-Console.WriteLine("Task 58");
-Console.Write("Input a number of rows: ");
-int rows = Convert.ToInt32(Console.ReadLine());
-Console.Write("Input a number of columns: ");
-int columns = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine($"The sum of natural elements in between {N} and 1 is equal to {SumNums(N,1)}");
 
-int[,] mattrix1 = CreateRandomMatrix(rows,columns);
-int[,] mattrix2 = CreateRandomMatrix(columns,rows);
-Show2dArray(mattrix1);
-Show2dArray(mattrix2);
-Show2dArray(MultipleMatrix(mattrix1, mattrix2));
-
-//Задача 60. Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. 
-//Напишите программу, которая будет построчно выводить массив, добавляя индексы каждого элемента.
-int[,,] CreateThreeArray(int s1, int s2, int s3)
+//Задача 68: Напишите программу вычисления функции Аккермана с помощью рекурсии. 
+//Даны два неотрицательных числа m и n.
+int FAckerman(int m, int n)
 {
-    int[,,] threeArray = new int[s1,s2,s3];
-    for(int i = 0; i < s1; i++)
-        for(int j = 0; j < s2; j++)
-            for(int k = 0; k < s3; k++)
-            {
-                int temp = 0;
-                while(NumberExists(threeArray,temp)) 
-                { //поиск следующего уникального числа
-                    temp = new Random().Next(10,  100);
-                }
-                threeArray[i,j,k] = temp;
-            }
-    return threeArray;
-}
-void ShowThreeArray(int[,,] array)
-{   // обшарил весь инет в поисак лучшего способа вывести трехмерный массив
-    // на мой взгляд этот довольно нагляден
-    Console.WriteLine($"Размеры массива {array.GetLength(0)} {array.GetLength(1)} {array.GetLength(2)}");
-    for(int i = 0; i < array.GetLength(0); i++)
-    {
-        Console.Write($"Массив №{i} \n");
-        for(int j = 0; j < array.GetLength(1); j++)
-        {
-            for(int k = 0; k < array.GetLength(2); k++)
-            {
-                Console.Write($"{array[i,j,k]}({i},{j},{k})");
-                if(k != array.GetLength(2)-1) Console.Write(",");
-            }
-            Console.WriteLine();
-        }
-        Console.WriteLine();
-    }   
-}
-bool NumberExists(int[,,] array, int number)
-{   //Проверка на существование числа в массиве
-    for(int i = 0; i < array.GetLength(0); i++)
-        for(int j = 0; j < array.GetLength(1); j++)
-            for(int k = 0; k < array.GetLength(2); k++)
-                if(array[i,j,k] == number) return true;
-    return false;
+  if (m == 0)
+    return n + 1;
+  else
+    if ((m != 0) && (n == 0))
+      return FAckerman(m - 1, 1);
+    else
+      return FAckerman(m - 1, FAckerman(m, n - 1));   
 }
 Console.WriteLine();
-Console.WriteLine("Task 60");
-ShowThreeArray(CreateThreeArray(2,2,2));
-
-// Задача 62. Напишите программу, которая заполнит спирально массив 4 на 4.
-// в этой задаче я совсем запутался. Должно раюотать, но не работает. И я не понимаю почему.
-
-void SpiralFill(int[,] array)
-{
-    int n = 0;
-    int m = 0;
-    int Ibeg = 0, Ifin = 0, Jbeg = 0, Jfin = 0;
-    int k = 1;
-    int i = 0;
-    int j = 0;
-    while (k <= n * m)
-    {
-        array[i,j] = k;
-        if (i == Ibeg && j < m - Jfin - 1)
-            ++j;
-        else if (j == m - Jfin - 1 && i < n - Ifin - 1)
-            ++i;
-        else if (i == n - Ifin - 1 && j > Jbeg)
-            --j;
-        else
-            --i;
-        
-        if ((i == Ibeg + 1) && (j == Jbeg) && (Jbeg != m - Jfin - 1))
-        {
-            ++Ibeg;
-            ++Ifin;
-            ++Jbeg;
-            ++Jfin;
-        }
-        ++k;
-    }
-}
-Console.WriteLine();
-Console.WriteLine("Task 62");
-int[,] arrayTask62 = new int[4,4];
-
-SpiralFill(arrayTask62);
-Show2dArray(arrayTask62);
-
+Console.WriteLine($"The Ackerman function for the numbers {N} and {1} is equal to {FAckerman(N,1)}");
